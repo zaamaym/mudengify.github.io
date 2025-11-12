@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Beranda - Mudengify</title>
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+
+  <!-- CSS utama -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/home.css" />
+</head>
+
+<body class="theme-fun">
+
+  <!-- === HEADER / TOPBAR === -->
+  <header class="topbar">
+    <div class="brand-mini">
+      <img 
+        src="assets/img/mudengify.png"
+        alt="Mudengify" 
+        class="brand-logo"
+        onmouseover="this.src='assets/img/mudengifylogo_animated.gif'" 
+        onmouseout="this.src='assets/img/mudengify.png'"
+        onclick="location.href='home.html'"
+      >
+    </div>
+
+    <!-- Tombol menu (mobile only) -->
+    <button id="menuToggle" class="menu-toggle" aria-label="Buka menu">☰</button>
+
+    <!-- Menu desktop -->
+    <nav class="nav-buttons">
+      <button class="nav-btn primary" onclick="location.href='index.html'">Try Out Saya</button>
+      <button class="nav-btn" data-alert="Dashboard">Dashboard</button>
+      <button class="nav-btn" data-alert="Leaderboard">Leaderboard</button>
+      <button class="nav-btn" data-alert="Materi Belajar">Materi Belajar</button>
+      <button class="nav-btn blue" onclick="location.href='source.html'">Source Code</button>
+    </nav>
+  </header>
+
+  <!-- === MENU MOBILE === -->
+  <nav id="mobileMenu" class="mobile-menu">
+    <button class="nav-btn primary" onclick="location.href='index.html'">Try Out Saya</button>
+    <button class="nav-btn" data-alert="Dashboard">Dashboard</button>
+    <button class="nav-btn" data-alert="Leaderboard">Leaderboard</button>
+    <button class="nav-btn" data-alert="Materi Belajar">Materi Belajar</button>
+    <button class="nav-btn blue" onclick="location.href='source.html'">Source Code</button>
+  </nav>
+
+  <!-- === MAIN CONTENT === -->
+  <main>
+    <div class="construction-icon">🚧</div>
+    <div class="brand-mini" style="align-items:center;">
+      <img src="assets/img/construction.jpg" alt="Under Construction" class="construction-img">
+    </div>
+    <h2>Beranda Mudengify Sedang Dalam Pengembangan</h2>
+    <p class="under-construction">
+      Fitur-fitur seru sedang disiapkan! Sementara itu, kamu bisa langsung mulai Try Out di atas 🎯
+    </p>
+  </main>
+
+  <!-- === FOOTER === -->
+  <footer>Made with ❤️ for learners — Mudengify</footer>
+
+  <!-- === 🔔 PANEL NOTIFIKASI (alert custom) === -->
+  <div id="alert-panel" class="alert-panel hidden">
+    <div class="alert-content">
+      <span id="alert-text">Fitur sedang dikembangkan 🚧</span>
+      <button id="close-alert" aria-label="Tutup">&times;</button>
+    </div>
+  </div>
+
+  <!-- === JAVASCRIPT === -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/home.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Token Ujian - Mudengify</title>
+
+  <!-- === STYLES === -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/token.css" />
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+</head>
+
+<body class="theme-fun">
+  <!-- === HEADER === -->
+  <!-- === HEADER === -->
+    <header class="topbar">
+  <div class="brand-mini">
+    <img
+      src="assets/img/mudengify.png"
+      alt="Mudengify"
+      class="brand-logo"
+      onmouseover="this.src='assets/img/mudengifylogo_animated.gif'"
+      onmouseout="this.src='assets/img/mudengify.png'"
+    />
+  </div>
+
+  <div class="top-actions">
+    <button id="logout-btn" class="btn logout-top">Logout</button>
+  </div>
+</header>
+
+  <!-- === MAIN CONTENT === -->
+  <main class="page-center">
+    <section class="card" style="max-width: 600px;">
+      <h1 style="text-align: center;">🔐 Token Ujian</h1>
+      <p style="text-align: center; color: var(--muted); margin-bottom: 12px;">
+        Pastikan membaca peraturan sebelum memulai ujian.
+      </p>
+      <hr style="margin: 16px 0; opacity: 0.3;" />
+      <!-- Peraturan Tes -->
+      <div class="rules">
+        <h3>📘 Peraturan Tes:</h3>
+        <ul>
+          <li>Disarankan menggunakan desktop untuk mempermudah membaca soal.</li>
+          <li>
+            Token berlaku selama <strong>1 menit</strong>, selebihnya menunggu
+            <strong>5 menit</strong> untuk token baru.
+          </li>
+          <li>Dilarang menutup halaman selama ujian berlangsung.</li>
+          <li>Kerjakan dengan jujur dan amanah.</li>
+          <li>
+            Gunakan waktu dengan bijak — sistem akan menutup otomatis saat waktu habis.<br></br>
+          </li>
+        </ul>
+      </div>
+      <hr style="margin: 16px 0; opacity: 0.3;" />
+      <div class="description">
+        <h3>🧩 Deskripsi Soal:</h3>
+        <ul>
+          <li id = "namamapel"><strong>Mapel:</strong> Bahasa Indonesia</li>
+          <li id = "jumlahsoal"><strong>Jumlah Soal:</strong> 40 soal</li>
+          <li id="tipesoal"><strong>Tipe Soal:</strong> 30 Pilihan Ganda, 5 PGK MCMA, 5 PGK Kategori</li>
+          <li id = "durasinya"><strong>Durasi:</strong> 90 menit</li>
+        </ul>
+      </div>
+
+      <hr style="margin: 16px 0; opacity: 0.3;" />
+
+      <!-- Token Aktif -->
+      <div class="token-section" style="text-align: center;">
+        <p><strong>Token aktif:</strong></p>
+        <div class="token-inline">
+          <div id="tokenBox" class="token-box">••••••</div>
+          <button id="copyToken" class="btn-copy" title="Salin Token">📋</button>
+        </div>
+        <div style="margin-top: 8px;">
+          <button id="refreshToken" class="btn ghost small-btn">🔄 Refresh Token</button>
+        </div>
+      </div>
+
+      <!-- Form Input Token -->
+      <form id="tokenForm" class="form" style="margin-top: 20px; text-align: center;" autocomplete="off" novalidate>
+        <label class="label">
+          Masukkan Token:
+          <input id="tokenInput" placeholder="contoh: ABC123" required />
+        </label>
+        <button type="submit" class="btn primary" style="margin-top: 10px;">
+          Lanjut ke Ujian 🚀
+        </button>
+      </form>
+    </section>
+        <!-- === POPUP NOTIFIKASI === -->
+    <div id="loginAlert" class="hidden popup">
+      <span id="popupMessage"></span>
+      <div id="popupProgress" class="popup-progress"></div>
+    </div>
+
+    <footer class="footer-note">Made with ❤️ for learners</footer>
+  </main>
+
+  <!-- === SCRIPT === -->
+  <script>
+  // === 1️⃣ Ambil data user dan mapel ===
+  const userStr = localStorage.getItem('mudengify_user');
+  if (!userStr) {
+    alert('Anda belum login.');
+    location.assign('index.html');
+  }
+
+  const user = JSON.parse(userStr);
+  const mapel = user.mapel; // contoh: "bahasa-indonesia"
+
+  // === 2️⃣ Load rules.js terlebih dahulu ===
+  const dataScript = document.createElement('script');
+  dataScript.src = `data/${mapel}/rules.js`;
+  dataScript.type = 'text/javascript';
+  dataScript.onload = () => {
+    console.log('✅ Data rules dimuat untuk:', mapel);
+
+    // Pastikan rules benar-benar ada
+    if (window.rules) {
+      console.log('loaded');
+    } else {
+      console.error('rules belum terdeteksi setelah load!');
+    }
+
+    // === 3️⃣ Setelah data siap, baru load token.js ===
+    const logicScript = document.createElement('script');
+    logicScript.src = "assets/js/token.js";
+    logicScript.type = 'text/javascript';
+    logicScript.onload = () => console.log('✅ Logic quiz dimuat');
+    document.body.appendChild(logicScript);
+  };
+
+  dataScript.onerror = () => {
+    alert(`Gagal memuat data untuk mapel: ${mapel}`);
+  };
+  document.body.appendChild(dataScript);
+</script>
+</body>
+</html>

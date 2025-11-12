@@ -1,0 +1,109 @@
+<!-- INDEX.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Login ke Mudengify TKA — Simulasi TKA Bahasa Indonesia interaktif untuk pelajar." />
+  <title>Login - Mudengify TKA</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/index.css" />
+</head>
+
+<body class="theme-fun">
+  <main class="page-center">
+    <!-- === BRAND HEADER === -->
+    <header class="brand" role="banner">
+      <a href="home.html" class="brand-link" title="Kembali ke beranda Mudengify">
+        <img 
+          src="assets/img/mudengifylogo.png"
+          alt="Mudengify"
+          class="logo-img"
+          onmouseover="this.src='assets/img/mudengify_animated.gif'" 
+          onmouseout="this.src='assets/img/mudengifylogo.png'"
+        >
+      </a>
+      <p class="tag">Platform belajar terkece, terkeren, dan terkalcer 😎</p>
+    </header>
+
+    <!-- === LOGIN FORM === -->
+    <section class="card login-card" aria-labelledby="loginTitle">
+      <h2 id="loginTitle">Masuk Peserta</h2>
+
+      <form id="loginForm" class="form" autocomplete="off" novalidate>
+        <label class="label">Username
+          <input 
+            id="username" 
+            name="username" 
+            type="text" 
+            placeholder="Masukkan username" 
+            required 
+          />
+        </label>
+
+        <label class="label">Password
+          <div class="password-row">
+            <input 
+              id="password" 
+              name="password" 
+              type="password" 
+              placeholder="Masukkan password" 
+              required 
+            />
+            <button 
+              type="button" 
+              id="togglePassword" 
+              class="icon-btn" 
+              aria-label="Tampilkan atau sembunyikan password"
+            >👁️</button>
+          </div>
+        </label>
+
+        <!-- === MAPEL DROPDOWN === -->
+        <label class="label">Mata Pelajaran</label>
+        <div class="mapel-dropdown">
+          <button id="mapelButton" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span id="mapelLabel" style="font-weight:400;">Pilih Mata Pelajaran</span>
+            <span class="arrow" aria-hidden="true">🎓</span>
+          </button>
+          <ul id="mapelList" class="hidden" role="listbox">
+            <li data-value="bahasa-indonesia" style="font-weight:500;">🇮🇩 Bahasa Indonesia</li>
+          </ul>
+        </div>
+
+        <input type="hidden" id="mapelInput" name="mapel" value="">
+
+        <button type="submit" class="btn primary">MASUK</button>
+        <p id="modeStatus" class="mode-status"></p>
+        <p class="demo-note">Demo akun • <strong>siswa123</strong> / <strong>mudengify</strong></p>
+      </form>
+
+      <!-- === POPUP ALERT === -->
+      <div id="loginAlert" class="popup hidden" role="alert">
+        <div class="popup-content">
+          <span id="popupMessage"></span>
+          <div id="popupProgress" class="popup-progress"></div>
+        </div>
+      </div>
+
+      <p class="small-note">
+        Butuh akun? 
+        <a href="https://www.instagram.com/bahlillahadalia/" target="_blank" rel="noopener noreferrer">
+          Hubungi panitia
+        </a>.
+      </p>
+    </section>
+
+    <footer class="footer-note">Made with ❤️ for learners</footer>
+  </main>
+
+  <!-- JS -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/index.js"></script>
+</body>
+</html>

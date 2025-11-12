@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Source Code - Mudengify</title>
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+
+  <!-- === STYLES === -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/source.css" />
+
+  <!-- Highlight.js (Syntax Highlighting) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+  />
+</head>
+
+<body class="theme-fun">
+  <!-- === HEADER / TOPBAR === -->
+  <header class="topbar">
+    <div class="brand-mini">
+      <img
+        src="assets/img/mudengify.png"
+        alt="Mudengify"
+        class="brand-logo"
+        onmouseover="this.src='assets/img/mudengifylogo_animated.gif'"
+        onmouseout="this.src='assets/img/mudengify.png'"
+        onclick="location.href='home.html'"
+      />
+    </div>
+
+    <!-- Tombol menu (mobile only) -->
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      style="font-weight: 800;"
+      aria-label="Buka menu"
+    >
+      ☰
+    </button>
+
+    <!-- Menu versi desktop -->
+    <nav class="nav-buttons">
+      <button class="nav-btn primary" onclick="location.href='index.html'">Try Out Saya</button>
+      <button class="nav-btn" data-alert="Dashboard">Dashboard</button>
+      <button class="nav-btn" data-alert="Leaderboard">Leaderboard</button>
+      <button class="nav-btn" data-alert="Materi Belajar">Materi Belajar</button>
+      <!-- 🔥 Tombol baru -->
+      <button class="nav-btn blue" onclick="location.href='source.html'">Source Code</button>
+    </nav>
+  </header>
+
+  <!-- === MENU MOBILE === -->
+  <nav class="mobile-menu" id="mobileMenu">
+    <button class="nav-btn primary" onclick="location.href='index.html'">Try Out Saya</button>
+    <button class="nav-btn" data-alert="Dashboard">Dashboard</button>
+    <button class="nav-btn" data-alert="Leaderboard">Leaderboard</button>
+    <button class="nav-btn" data-alert="Materi Belajar">Materi Belajar</button>
+    <!-- 🔥 Tombol baru juga di mobile -->
+    <button class="nav-btn blue" onclick="location.href='source.html'">Source Code</button>
+  </nav>
+
+  <!-- === MAIN CONTENT === -->
+  <main class="source-main">
+    <!-- Finder Container -->
+    <section class="finder-view">
+      <div class="finder-toolbar">
+        <div class="finder-buttons">
+          <span class="btn red"></span>
+          <span class="btn yellow"></span>
+          <span class="btn green"></span>
+
+          <div class="nav-finder">
+            <button id="btnBack" title="Kembali"><span>←</span></button>
+            <button id="btnForward" title="Maju"><span>→</span></button>
+            <button id="btnClose" title="Tutup"><span>×</span></button>
+          </div>
+        </div>
+
+        <div class="finder-title">
+          <img src="assets/img/logo.png" alt="logo" />
+          <span id="finderPath">mudengify</span>
+        </div>
+      </div>
+
+      <div class="finder-body" id="finderBody">
+        <div class="finder-panel" id="finderPanel"></div>
+
+        <div class="finder-content" id="finderContent">
+          <pre>
+            <code id="codeContent" class="language-javascript">
+              // Klik file di kiri untuk melihat kodenya...
+            </code>
+          </pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- === FOOTER === -->
+  <footer>
+    Made with ❤️ for learners — Mudengify
+  </footer>
+
+  <!-- === ALERT PANEL === -->
+  <div id="alert-panel" class="alert-panel hidden">
+    <div class="alert-content">
+      <span id="alert-text">Fitur sedang dikembangkan 🚧</span>
+      <button id="close-alert" aria-label="Tutup">&times;</button>
+    </div>
+  </div>
+
+  <!-- === SCRIPTS === -->
+  <script src="assets/js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="assets/js/source.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ujian - Mudengify TKA</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/quiz.css" />
+</head>
+
+<body class="theme-fun">
+  <div id="app-content">
+    <!-- === HEADER === -->
+    <header class="topbar">
+  <div class="brand-mini">
+    <img
+      src="assets/img/mudengify.png"
+      alt="Mudengify"
+      class="brand-logo"
+      onmouseover="this.src='assets/img/mudengifylogo_animated.gif'"
+      onmouseout="this.src='assets/img/mudengify.png'"
+    />
+  </div>
+
+  <div class="top-actions">
+    <div id="progressWrap" class="progress-wrap" title="Progres soal">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+    <div class="timer">
+      ⏰ Waktu tersisa: <span id="countdown">01:30:00</span>
+    </div>
+
+    <button id="logout-btn" class="btn logout-top">Logout</button>
+  </div>
+</header>
+
+
+
+    <!-- === MAIN CONTENT === -->
+    <main class="quiz-layout">
+      <section class="main-content card">
+        <h1 class="quiz-title">TKA Bahasa Indonesia — Simulasi</h1>
+
+        <button id="open-list-btn" class="btn ghost small-btn">
+          📋 Daftar Soal
+        </button>
+
+        <!-- Pengaturan Ukuran Teks -->
+        <div class="font-slider">
+          <label for="fontRange">Ukuran Teks:</label>
+          <input
+            type="range"
+            id="fontRange"
+            min="5"
+            max="200"
+            step="5"
+            value="100"
+          />
+          <span id="fontValue">100%</span>
+        </div>
+
+        <!-- Area Soal -->
+        <div id="question-area"></div>
+
+        <!-- Navigasi Soal -->
+        <div class="navigation-buttons">
+          <button id="prev-btn" class="btn gud-btn bef" >⟨ Sebelumnya</button>
+          <button id="flag-btn" class="btn ghost gud-btn-flag">🚩 Ragu-Ragu</button>
+
+          <div class="nav-right">
+            <button id="next-btn" class="btn gud-btn nex" ">Selanjutnya ⟩</button>
+            <button id="submit-btn" class="btn nav-btn blue">Kumpulkan Jawaban</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <!-- ✅ Penutup #app-content -->
+
+  <!-- === MODAL DAFTAR SOAL === -->
+  <div id="question-modal" class="modal">
+    <div class="modal-content card">
+      <h2>Daftar Soal</h2>
+      <span class="close-btn">&times;</span>
+      <div id="question-list" class="question-list-grid"></div>
+    </div>
+  </div>
+  <!-- === POPUP NOTIFIKASI === -->
+  <div id="loginAlert" class="hidden popup">
+    <span id="popupMessage"></span>
+    <div id="popupProgress" class="popup-progress"></div>
+  </div>
+  <!-- === SCRIPTS === -->
+  <script>
+  // === 1️⃣ Ambil data user dan mapel ===
+  const userStr = localStorage.getItem('mudengify_user');
+  if (!userStr) {
+    alert('Anda belum login.');
+    location.assign('index.html');
+  }
+
+  const user = JSON.parse(userStr);
+  const mapel = user.mapel; // contoh: "bahasa-indonesia"
+  
+  // === 2️⃣ Load quiz_data.js terlebih dahulu ===
+  const dataScript = document.createElement('script');
+  dataScript.src = `data/${mapel}/quiz_data.js`;
+  dataScript.type = 'text/javascript';
+  dataScript.onload = () => {
+    console.log('✅ Data quiz dimuat untuk:', mapel);
+
+    // Pastikan QUIZ_DATA benar-benar ada
+    if (window.QUIZ_DATA) {
+      console.log('Jumlah soal:', window.QUIZ_DATA.length);
+    } else {
+      console.error('QUIZ_DATA belum terdeteksi setelah load!');
+    }
+
+    // === 3️⃣ Setelah data siap, baru load quiz_logic.js ===
+    const logicScript = document.createElement('script');
+    logicScript.src = "assets/js/quiz_logic.js";
+    logicScript.type = 'text/javascript';
+    logicScript.onload = () => console.log('✅ Logic quiz dimuat');
+    document.body.appendChild(logicScript);
+  };
+
+  dataScript.onerror = () => {
+    alert(`Gagal memuat data untuk mapel: ${mapel}`);
+  };
+  document.body.appendChild(dataScript);
+</script>
+</body>
+</html>

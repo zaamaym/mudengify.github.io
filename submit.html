@@ -1,0 +1,106 @@
+<!-- SUBMIT.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hasil - Mudengify TKA</title>
+
+  <!-- === FONTS & ICON === -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+
+  <!-- === STYLES === -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/submit.css" />
+
+  <!-- === LIBRARIES === -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body class="theme-fun">
+  <!-- === HEADER === -->
+  <header class="topbar">
+    <div class="brand-mini">
+      <img
+        src="assets/img/mudengify.png"
+        alt="Mudengify"
+        class="brand-logo"
+        onmouseover="this.src='assets/img/mudengifylogo_animated.gif'"
+        onmouseout="this.src='assets/img/mudengify.png'"
+      />
+    </div>
+    <button id="logout-btn" class="btn ghost logout-top">Logout</button>
+  </header>
+
+  <!-- === MAIN CONTENT === -->
+  <main class="page-center">
+    <section class="card result-card" aria-labelledby="page-title">
+      <div class="result-card-header">
+        <div class="header-top">
+          <img src="assets/img/mudengify.png" class="logo-card" />
+          <div id="username" class="usertext">username</div>
+        </div>
+        <h1 id="page-title">Hasil Ujian</h1>
+        <div id="mapeltext" class="mapeltext">mapel</div>
+      </div>
+      <div class="predikat-row">
+        <p class="predikat-label">Predikat :</p>
+        <div id="predikat" class="predikattext">Istimewa</div>
+      </div>
+      <!-- Skor utama -->
+      <div class="score-card">
+        <canvas id="scoreGauge" class="speedometer" width="20px" height="12px"></canvas>
+        <div id="final-score" class="score-large">--</div>
+      </div>
+
+      <!-- Statistik jawaban -->
+      <div class="stats-grid">
+        <div class="stat correct">
+          <div class="stat-title">BENAR</div>
+          <div id="count-correct" class="stat-value" style="color: rgb(2, 144, 16);">--</div>
+        </div>
+        <div class="stat wrong">
+          <div class="stat-title">SALAH</div>
+          <div id="count-wrong" class="stat-value" style="color: rgb(179, 26, 26);">--</div>
+        </div>
+        <div class="stat unanswered">
+          <div class="stat-title">TIDAK DIJAWAB</div>
+          <div id="count-unanswered" class="stat-value" style="color: rgb(195, 143, 0);">--</div>
+        </div>
+        <div class="stat total">
+          <div class="stat-title">TOTAL</div>
+          <div id="count-total" class="stat-value" style="color: rgb(0, 85, 138);">--</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tombol review -->
+    <div class="review-btn-wrap" style="margin-top: 20px; text-align: center;">
+      <button
+        id="review-btn"
+        class="btn nav-btn blue"
+        style="width: 100%; height: 25%;"
+      >
+        📖 Review Jawaban
+      </button>
+
+      <!-- Tombol efek & share -->
+      <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px;">
+        <button id="resetExamBtn" class="btn small-btn">🔁 Reset Ujian</button>
+        <button id="replayEffectBtn" class="btn small-btn">🎉</button>
+        <button id="shareBtn" class="btn small-btn">📤 Bagikan</button>
+      </div>
+    </div>
+  </main>
+  <!-- === POPUP NOTIFIKASI === -->
+    <div id="loginAlert" class="hidden popup">
+      <span id="popupMessage"></span>
+      <div id="popupProgress" class="popup-progress"></div>
+    </div>
+  <!-- === SCRIPT === -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="assets/js/submit.js"></script>
+</body>
+</html>
