@@ -1,0 +1,748 @@
+/* STYLE.css */
+/* =========================================================
+   🎨 ROOT VARIABLES
+   ========================================================= */
+:root {
+  --bg: #fff7fb;
+  --card: #ffffff;
+  --accent: #ff6b6b;
+  --accent2: #ffd93d;
+  --muted: #6b6b6b;
+  --shadow: 0 10px 25px rgba(99, 90, 255, 0.08);
+  --text: #222;
+}
+
+/* === Dark Mode === */
+body.dark {
+  --bg: #0f1226;
+  --card: #0b1020;
+  --text: #e9eef8;
+  --accent: #7bd389;
+  --accent2: #ffd36b;
+}
+
+/* =========================================================
+   🧩 RESET & GLOBAL
+   ========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  height: auto;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+body {
+  font-family: Inter, system-ui, Arial, Segoe UI, Roboto, 'Helvetica Neue';
+  background: linear-gradient(135deg, var(--bg), #f0f9ff);
+  background-attachment: fixed; /* penting */
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* =========================================================
+   🧱 LAYOUT
+   ========================================================= */
+.page-center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 760px;
+}
+
+/* =========================================================
+   🏷️ FORMS
+   ========================================================= */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.label input {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 2px solid #f0f0f3;
+  font-size: 15px;
+  background: linear-gradient(180deg, #fff, #fff);
+  width: 100%;
+}
+
+/* =========================================================
+   🔘 BUTTONS
+   ========================================================= */
+button, .btn, input, .option {
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+.btn {
+  padding: 10px 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Variants */
+.btn.primary {
+  background: linear-gradient(90deg, #ff7a7a, #ffb199);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 123, 123, 0.18);
+}
+
+.btn.primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  color: var(--text);
+}
+
+.btn.danger {
+  background: linear-gradient(90deg, #ff5964, #ff7b9c);
+  color: #fff;
+}
+
+.btn.danger:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.nav-btn.blue {
+  background: linear-gradient(90deg, #4a90e2, #5ec9f3) !important;
+  color: #fff !important;
+  border: none;
+  box-shadow: 0 4px 14px rgba(80, 160, 255, 0.3);
+}
+
+.nav-btn.blue:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+/* Keren Ini*/
+.gud-btn {
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+.gud-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.gud-btn-flag {
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+.gud-btn-flag:hover {
+  border-color: var(--accent2);
+  transform: translateY(-1px);
+}
+
+.nex{
+  background-color: #6395ff;
+  color: #f0f0f3;
+}
+.bef{
+  background-color: #ff4343;
+  color: #f0f0f3;
+}
+/* Small Button */
+.small-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  background: var(--card);
+  transition: all 0.2s ease;
+}
+
+.small-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   🚀 BRAND & HEADER
+   ========================================================= */
+.brand, .brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: column;
+  text-align: center;
+}
+
+.brand-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   🧭 TOPBAR
+   ========================================================= */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 80px 12px 18px;
+  max-width: 1200px;
+  margin: 12px auto;
+  border-radius: 12px;
+}
+
+.logout-top {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  z-index: 999;
+  background: linear-gradient(90deg, #e24a4a, #b72d2d) !important;
+  color: #fff !important;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 14px rgba(80, 160, 255, 0.3);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-top:hover {
+  filter: brightness(1.05);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   🧮 QUIZ LAYOUT
+   ========================================================= */
+.quiz-layout {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 8px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.main-content {
+  flex: 0 1 760px;
+  margin: 0 auto;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.quiz-title {
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+/* =========================================================
+   ❓ QUESTION CARD
+   ========================================================= */
+.question-content {
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.question-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.options-group label {
+  display: block;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.options-group input[type="radio"],
+.options-group input[type="checkbox"] {
+  display: none;
+}
+
+.option:hover {
+  border-color: var(--accent);
+  background: linear-gradient(90deg, #fff8e1, #ffeaea);
+}
+
+input[type="radio"]:checked + .option,
+input[type="checkbox"]:checked + .option {
+  background: linear-gradient(90deg, #ffd93d55, #ff6b6b33);
+  border-color: var(--accent);
+  font-weight: 700;
+}
+
+/* =========================================================
+   ⏩ NAVIGATION
+   ========================================================= */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding: 6px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 8px;
+}
+
+/* =========================================================
+   🔢 QUESTION LIST GRID
+   ========================================================= */
+.question-list-grid {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(45px, 45px));
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.question-number-btn {
+  position: relative;
+  font-weight: 600;
+  aspect-ratio: 1.06/1;
+  border-radius: 8px;
+  border: 2px solid rgba(231, 170, 162, 0.6);
+  background: linear-gradient(130deg, #fffaea, #ffb0b0);
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.2s ease;
+}
+
+.question-number-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Status states */
+.status-sudah { background: linear-gradient(90deg, #ffd3b8, #ffb8b8); border-color: rgb(227,127,76); }
+.status-belum { background: #ffeaea; border-color: #e6cfc4; }
+.status-ragu  { background: linear-gradient(90deg, #ffe066, #ffd43b); border-color: #ffb300; }
+.status-aktif { outline: 3px solid rgba(255,107,107,0.2); transform: scale(1.03); }
+
+/* Indicator bubble */
+.answer-indicator {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--text);
+  font-size: 10.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  border: 0.1px solid rgb(227,127,76);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* =========================================================
+   📊 STAT CARD
+   ========================================================= */
+.stat {
+  position: relative;
+  background: linear-gradient(145deg, #ffffff, #f5f7fb);
+  border-radius: 14px;
+  padding: 0.8rem 0.6rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.stat:hover {
+  transform: translateY(-3px);
+  outline: 3px solid rgba(255, 107, 107, 0.2);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
+.stat::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 180%;
+  height: 180%;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.25), transparent 70%);
+  transform: rotate(25deg);
+}
+
+.stat::after {
+  content: attr(data-icon);
+  font-size: 20px;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   🪟 MODAL / POPUP
+   ========================================================= */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  animation: pop 0.25s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.close-btn:hover { color: var(--accent); }
+
+/* Blur background saat modal */
+body.modal-open #app-content,
+body.modal-open header,
+body.modal-open #logout-btn {
+  filter: blur(6px);
+  transition: filter 0.3s ease;
+}
+
+/* =========================================================
+   ⚙️ UTILITIES
+   ========================================================= */
+.no-underline { text-decoration: none; }
+
+.btn-copy {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 6px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.btn-copy:hover {
+  background: #f1f1f1;
+  transform: scale(1.1);
+}
+
+/* =========================================================
+   📱 RESPONSIVE
+   ========================================================= */
+@media (max-width: 992px) {
+  .brand-logo { height: 36px; }
+}
+
+@media (max-width: 900px) {
+  .quiz-layout { flex-direction: column;}
+  .sidebar { max-width: 100%; }
+  .question-list-grid { grid-template-columns: repeat(8, 1fr); justify-items: center;}
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 360px;
+  }
+  .question-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(42px, 42px));
+    justify-content: center;
+    justify-items: center;
+    gap: 6px;
+    overflow-y: auto;
+    max-height: 60vh;
+    padding-bottom: 8px;
+  }
+  .question-number-btn {
+    font-size: 14px;
+  }
+  .answer-indicator {
+    top: -4px;
+    right: -4px;
+    width: 16px;
+    height: 16px;
+    font-size: 9px;
+  }
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  .quiz-title { text-align: center; font-size: 18px; }
+}
+
+@media (max-width: 600px) {
+  .brand-logo { height: 32px; }
+}
+
+/* =========================================================
+   🎞️ ANIMATIONS
+   ========================================================= */
+@keyframes pop {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+/* =========================================================
+   ⚠️ CUSTOM POPUP ALERT
+========================================================= */
+.popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  padding: 14px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  background: linear-gradient(90deg, #fff9d4, #f3f3f3);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.popup.show {
+  opacity: 1;
+  transform: translateY(-10px);
+}
+.popup-progress {
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  margin-bottom: -3rem;
+  transition: width linear;
+}
+.popup-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================================================
+   ✨ ANIMATIONS & EFFECTS
+========================================================= */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
+
+/* Highlight effect */
+.highlight {
+  border: 2px solid #ff9100;
+  box-shadow: 0 0 10px 3px rgba(255, 145, 0, 0.6);
+  transition: all 0.3s ease;
+  animation: glowFade 1.5s ease forwards;
+}
+
+.highlight-red{
+  border: 2px solid #ff0800;
+  box-shadow: 0 0 10px 3px rgba(255, 25, 0, 0.6);
+  transition: all 0.3s ease;
+  animation: glowFadered 1.5s ease forwards;
+}
+@keyframes glowFade {
+  0% { box-shadow: 0 0 10px 3px rgba(255, 145, 0, 0.6); }
+  100% { box-shadow: none; border-color: transparent; }
+}
+@keyframes glowFadered {
+  0% { box-shadow: 0 0 10px 3px rgba(255, 17, 0, 0.6); }
+  100% { box-shadow: none; border-color: transparent; }
+}
+/* === RESET MODAL STYLING === */
+.logout-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.logout-panel {
+  position: relative;
+  z-index: 10000;
+  background: #fff;
+  padding: 24px 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+  max-width: 320px;
+  width: 85%;
+  text-align: center;
+  animation: popIn 0.25s ease;
+}
+
+.logout-panel h3 {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  color: #c62828;
+}
+
+.logout-panel p {
+  color: #444;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+/* Animasi kecil biar smooth muncul */
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+/* === WARNA DINAMIS === */
+.popup-success {
+  background: linear-gradient(90deg, #a8ffcc, #18ff55); /* hijau */
+}
+.popup-error {
+  background: linear-gradient(90deg, #ff9b9b, #ff1818); /* merah */
+}
+.popup-info {
+  background: linear-gradient(90deg, #93d4ff, #12a0ff); /* biru */
+}
+.popup-warning {
+  background: linear-gradient(90deg, #fffb14, #ffb134); /* kuning/oranye */
+}
+
+/* === PROGRESS BAR === */
+.popup-progress {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  border-radius: 2px;
+  margin-top: 8px;
+  transition: width linear;
+}
+
+/* === RESET MODAL STYLING === */
+.reset-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.reset-panel {
+  position: relative;
+  z-index: 10000;
+  background: #fff;
+  padding: 24px 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+  max-width: 320px;
+  width: 85%;
+  text-align: center;
+  animation: popIn 0.25s ease;
+}
+
+.reset-panel h3 {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  color: #c62828;
+}
+
+.reset-panel p {
+  color: #444;
+  margin-bottom: 12px;
+  font-size: 15px;
+}

@@ -1,0 +1,307 @@
+/* HOME.CSS */
+/* =========================================================
+   🎨 ROOT VARIABLES
+========================================================= */
+:root {
+  --card: #fff;
+  --accent: #ff7a7a;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --muted: #666;
+}
+
+/* =========================================================
+   🧍 BODY
+========================================================= */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+}
+
+/* =========================================================
+   🧭 TOPBAR
+========================================================= */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  padding: 10px 24px;
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow);
+}
+
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   🔘 NAVIGATION BUTTONS
+========================================================= */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  background: var(--card);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Primary button */
+.nav-btn.primary {
+  background: linear-gradient(90deg, #ff7a7a, #ffb199);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(255, 107, 107, 0.3);
+}
+
+/* Blue button */
+.nav-btn.blue {
+  background: linear-gradient(90deg, #4a90e2, #5ec9f3);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(80, 160, 255, 0.3);
+}
+
+.nav-btn.blue:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   📄 MAIN CONTENT
+========================================================= */
+main {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  text-align: center;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.construction-wrapper {
+  animation: floaty 3s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.construction-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.under-construction {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* =========================================================
+   🖼️ CONSTRUCTION IMAGE
+========================================================= */
+.construction-img {
+  display: block;
+  width: 80%;
+  max-width: 280px;
+  height: 130px;
+  margin: 0 auto 16px auto;
+  background-size: cover;
+  background-position: top center;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease;
+}
+
+.construction-img:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 600px) {
+  .construction-img {
+    width: 90%;
+    max-width: 220px;
+  }
+}
+
+/* =========================================================
+   ⚠️ ALERT PANEL
+========================================================= */
+.alert-panel {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 260px;
+  max-width: 90%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 120, 120, 0.25);
+  background: linear-gradient(90deg, #ffe8e8, #fff5d6);
+  color: #444;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.25);
+  backdrop-filter: blur(6px);
+  transform: translateX(-50%) translateY(-20px);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.alert-panel.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.alert-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+}
+
+#alert-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+#close-alert {
+  background: none;
+  border: none;
+  color: #ff4a4a;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#close-alert:hover {
+  transform: scale(1.2);
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(calc(-50% - 5px)); }
+  20%, 40%, 60%, 80% { transform: translateX(calc(-50% + 5px)); }
+}
+
+.alert-panel.shake {
+  animation: shake 0.45s ease;
+}
+
+/* =========================================================
+   🍔 MOBILE MENU (RESPONSIVE)
+========================================================= */
+.menu-toggle {
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* === Mobile Styles === */
+@media (max-width: 700px) {
+  .nav-buttons {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: relative;
+    z-index: 2001;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .menu-toggle:hover {
+    transform: scale(1.1);
+    color: var(--accent);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 135px;
+    left: 25px;
+    width: 88%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border-radius: 0 0 12px 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu .nav-btn {
+    width: 80%;
+    margin: 6px auto;
+  }
+}
+
+/* =========================================================
+   ⚓ FOOTER
+========================================================= */
+footer {
+  text-align: center;
+  margin: 40px 0 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

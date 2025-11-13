@@ -1,0 +1,293 @@
+/* REVIEW.css */
+/* ================================
+   ROOT VARIABLES
+=================================== */
+:root {
+  --bg: #fff7fb;
+  --card: #ffffff;
+  --accent: #ff6b6b;
+  --accent2: #ffd93d;
+  --muted: #6b6b6b;
+  --shadow: 0 10px 25px rgba(99, 90, 255, 0.06);
+  --text: #222;
+}
+
+/* ================================
+   REVIEW PAGE STYLES
+=================================== */
+.review-page {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* --- Kartu dan Soal --- */
+.review-page .review-card {
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 16px;
+}
+
+.review-page {
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.question-text {
+  font-weight: 400;
+  transition: font-size 0.2s ease;
+}
+
+.source-text{
+  color: #636363;
+  margin-top: -3px;
+  font-size: 14px;
+  font-weight: 500;
+}
+/* --- Pilihan Jawaban --- */
+.review-page .option.review-option {
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin: 4px 0;
+  background: #fafafa;
+}
+
+/* ✅ Benar / ❌ Salah */
+.review-option.correct,
+.review-page .option.review-option.correct {
+  background-color: #eafaea;
+  border-left: 4px solid #4cd964;
+  color: #155724;
+}
+
+.review-option.wrong,
+.review-page .option.review-option.wrong {
+  background-color: #fdeaea;
+  border-left: 4px solid #ff4d4d;
+  color: #721c24;
+}
+
+/* --- Tombol Nomor Soal --- */
+.review-page .question-number-btn {
+  padding: 6px 10px;
+  margin: 4px;
+  border-radius: 8px;
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.review-page .question-number-btn .status-correct {
+  border: 2px solid #28a745;
+  color: #28a745 !important;
+}
+
+.review-page .question-number-btn .status-wrong {
+  border: 2px solid #dc3545;
+  color: #dc3545;
+}
+
+.review-page .question-number-btn.status-belum {
+  border: 2px solid #ccc;
+  background: #f9f9f9;
+  color: #777;
+}
+
+.review-page .question-number-btn.status-aktif {
+  box-shadow: 0 0 5px #333;
+}
+
+/* --- True/False Table --- */
+.review-page .tf-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.review-page .tf-table th,
+.review-page .tf-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.review-page .tf-table th {
+  background: linear-gradient(90deg, #ffeaea, #fff7fb);
+  font-weight: 600;
+}
+
+/* --- Indikator Jawaban --- */
+.correct,
+.review-page .correct {
+  color: #009900;
+  font-weight: 600;
+}
+
+.wrong,
+.review-page .wrong {
+  color: #cc0000;
+  font-weight: 600;
+}
+
+/* --- Penjelasan & Kesulitan --- */
+.review-page .explanation {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 6px;
+}
+
+.review-page .difficulty {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+/* =========================================================
+   🧭 TOPBAR (Versi Rapi & Responsif)
+========================================================= */
+.topbar {
+  position: sticky;
+  margin-top: -5px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  padding: 10px 20px;
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+/* =========================================================
+   🚪 LOGOUT BUTTON
+========================================================= */
+.logout-top {
+  position: absolute;
+  background: linear-gradient(90deg, #e24a4a, #d85e5e) !important;
+  color: #fff !important;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 14px rgba(80, 160, 255, 0.15);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.logout-top:hover {
+  filter: brightness(1.05);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   📱 RESPONSIVE
+========================================================= */
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .logout-top {
+    padding: 7px 12px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+}
+.backresult {
+  position: absolute;
+  top: 1.25rem;
+  right: 2rem;
+  font-size: 13px;
+  height: 30px;
+  width: auto;
+  background: linear-gradient(90deg, #5a95da, #70a4df) !important;
+  color: #fff !important;
+  border-radius: 3px;
+  box-shadow: 0 4px 14px rgba(80, 160, 255, 0.15);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  border-radius: 8px;
+  padding: 4px 12px;
+  z-index: 10;
+}
+.backresult:hover {
+  filter: brightness(1.05);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .backresult{
+    right: 1rem;
+  }
+}
+.review-option.correct {
+  background: rgba(46, 204, 113, 0.15);
+  border-left: 4px solid #2ecc71;
+}
+.review-option.wrong {
+  background: rgba(231, 76, 60, 0.15);
+  border-left: 4px solid #e74c3c;
+}
+.review-option.missed {
+  background: rgba(241, 196, 15, 0.15);
+  border-left: 4px solid #f1c40f;
+}
+
+/* Tombol navigasi dasar */
+.navigation-buttons .btn {
+  transition: all 0.2s ease;
+}
+
+/* Keadaan tombol nonaktif */
+.btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+}
+
+
+.question-number-btn.status-correct {
+  color: #187b2f; /* hijau */
+}
+
+.question-number-btn.status-wrong {
+  color: #dc3545; /* merah */
+}
+
+.question-number-btn.status-unanswered {
+  color: #343432; /* abu-abu */
+}
+
+.question-number-btn.status-aktif {
+  outline: 3px solid rgba(255,107,107,0.2);
+  transform: scale(1.03);
+}

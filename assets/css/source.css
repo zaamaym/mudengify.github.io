@@ -1,0 +1,471 @@
+/* SOURCE.css */
+/* ==============================
+   🎨 ROOT VARIABLES
+============================== */
+:root {
+  --card: #fff;
+  --accent: #ff7a7a;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --muted: #666;
+}
+
+/* ==============================
+   🧍 BODY
+============================== */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+}
+
+/* ==============================
+   🧭 TOPBAR
+============================== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 10px 24px;
+  border-radius: 0 0 16px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* cukup tinggi tapi bukan paling tinggi */
+}
+
+/* Brand */
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 48px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  background: var(--card);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.nav-btn.primary {
+  background: linear-gradient(90deg, #ff7a7a, #ffb199);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(255, 107, 107, 0.3);
+  border: none;
+}
+
+/* ==============================
+   🍔 HAMBURGER MENU (Mobile)
+============================== */
+.menu-toggle {
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* Mobile menu styles */
+@media (max-width: 700px) {
+  .nav-buttons {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    z-index: 2001; /* di atas menu */
+    position: relative;
+  }
+
+  .menu-toggle:hover {
+    transform: scale(1.1);
+    color: var(--accent);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 135px;
+    left: 0;
+    width: 100%;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    border-radius: 0 0 12px 12px;
+    padding: 10px 0;
+    text-align: center;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+
+  .mobile-menu.open {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu .nav-btn {
+    margin: 6px auto;
+    width: 80%;
+  }
+}
+
+/* ==============================
+   📄 MAIN CONTENT
+============================== */
+main {
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+  background: var(--card);
+  padding: 32px 24px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.construction-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.under-construction {
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin: 40px 0 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ==============================
+   🗂 FINDER VIEW
+============================== */
+.source-main {
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.finder-view {
+  width: 100%;
+  max-width: 1100px;
+  background: #1e1e1e;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Finder Toolbar */
+.finder-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: linear-gradient(180deg, #3a3a3a, #2a2a2a);
+  border-bottom: 1px solid #444;
+}
+
+.finder-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.btn.red { width: 10px; height: 7px; background: #ff5f57; }
+.btn.yellow { background: #febc2e; }
+.btn.green { background: #28c840; }
+
+.nav-finder {
+  display: flex;
+  gap: 6px;
+  margin-left: 16px;
+}
+
+.nav-finder button {
+  background: none;
+  border: 1px solid #444;
+  color: #ccc;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-finder button:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: #666;
+}
+
+.nav-finder button:active {
+  transform: scale(0.95);
+}
+
+.finder-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ccc;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.finder-title img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Finder Body Layout */
+.finder-body {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  transition: all 0.4s ease;
+}
+
+/* Finder Panel (sidebar) */
+.finder-panel {
+  background: #2b2b2b;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid #444;
+}
+
+.finder-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-family: "JetBrains Mono", monospace;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  color: #eee;
+}
+
+.finder-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+.finder-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.finder-item:hover {
+  background: rgba(0,0,0,0.05);
+  transform: translateX(4px);
+}
+
+.file-open .finder-item {
+  opacity: 0.5;
+}
+
+.loading {
+  text-align: center;
+  color: #999;
+  padding: 30px;
+  font-style: italic;
+  animation: fade 1s infinite alternate;
+}
+
+@keyframes fade {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+.img-viewer img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+/* Finder Content (file viewer) */
+.finder-content {
+  background: #1e1e1e;
+  padding: 16px;
+  overflow: auto;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.finder-content pre {
+  text-align: left;
+  background: #1e1e1e;
+  color: #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+}
+
+
+/* === Mobile Finder View === */
+@media (max-width: 800px) {
+  .finder-view {
+    height: calc(100vh - 140px);
+  }
+
+  .finder-body {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+
+  .finder-panel, .finder-content {
+    width: 100%;
+    height: calc(100vh - 160px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.4s ease;
+    overflow-y: auto;
+  }
+
+  .finder-content pre {
+    min-height: 100%;
+  }
+
+  /* Saat file dibuka */
+  .finder-body.file-open .finder-panel {
+    transform: translateX(-100%);
+  }
+
+  .finder-body.file-open .finder-content {
+    transform: translateX(0);
+  }
+
+  .finder-panel {
+    transform: translateX(0);
+  }
+
+  .finder-content {
+    transform: translateX(100%);
+  }
+}
+
+/* ==============================
+   ⚠️ ALERT PANEL
+============================== */
+.alert-panel {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: linear-gradient(90deg, #ffe8e8, #fff5d6);
+  color: #444;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.25);
+  padding: 14px 20px;
+  z-index: 2000;
+  min-width: 260px;
+  max-width: 90%;
+  opacity: 0;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 120, 120, 0.25);
+}
+
+.alert-panel.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.alert-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 14px;
+}
+
+#alert-text {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+#close-alert {
+  background: none;
+  border: none;
+  color: #ff4a4a;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#close-alert:hover {
+  transform: scale(1.2);
+}
+
+/* Hidden helper */
+.hidden {
+  display: none;
+}
+
+/* Shake effect */
+@keyframes shake {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(calc(-50% - 5px)) translateY(0); }
+  20%, 40%, 60%, 80% { transform: translateX(calc(-50% + 5px)) translateY(0); }
+}
+
+.alert-panel.shake {
+  animation: shake 0.45s ease;
+}

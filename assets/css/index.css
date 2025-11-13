@@ -1,1 +1,245 @@
+/* INDEX.CSS */
 
+/* =========================================================
+   🎨 ROOT VARIABLES
+========================================================= */
+:root {
+  --bg: #fff7fb;
+  --card: #ffffff;
+  --accent: #ff6b6b;
+  --accent2: #ffd93d;
+  --muted: #6b6b6b;
+  --shadow: 0 10px 25px rgba(99, 90, 255, 0.06);
+  --text: #222;
+}
+
+/* =========================================================
+   🧍 GENERIC ELEMENTS
+========================================================= */
+.password-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+/* =========================================================
+   🔽 INPUT SELECT (Dropdown Standar)
+========================================================= */
+.input-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input-select select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--card);
+  border: 2px solid #f0f0f3;
+  border-radius: 10px;
+  appearance: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.input-select select:hover,
+.input-select select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.input-select::after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 55%;
+  transform: translateY(-50%);
+  color: var(--text);
+  pointer-events: none;
+  font-size: 12px;
+}
+
+/* =========================================================
+   🔐 LOGIN CARD
+========================================================= */
+.login-card {
+  max-width: 420px;
+  padding: 28px;
+  animation: pop 0.35s ease;
+}
+
+.demo-note {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 12.5px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.demo-note strong {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.small-note {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.small-note a {
+  color: var(--muted);
+  text-decoration: underline dotted;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.small-note a:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.brand .logo {
+  font-size: 42px;
+}
+
+.brand .title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.logo-img {
+  width: 200px;
+  height: auto;
+  transition: transform 0.25s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+.label .icon-btn{
+  position:absolute;
+  margin-top: 7px;
+  background: var(--card);
+  margin-left: 20rem;
+}
+
+/* =========================================================
+   📚 MAPEL DROPDOWN (Custom ala Mudengify)
+========================================================= */
+.mapel-dropdown {
+  position: relative;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.mapel-dropdown button {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--card);
+  border: 2px solid #f0f0f3;
+  border-radius: 12px;
+  cursor: pointer;
+  appearance: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.mapel-dropdown button:hover {
+  background: #ff7f7f;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 107, 107, 0.35);
+}
+
+.mapel-dropdown button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
+
+.mapel-dropdown .arrow {
+  font-size: 20px;
+  transition: transform 0.25s ease;
+}
+
+.mapel-dropdown.open .arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown List */
+.mapel-dropdown ul {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  z-index: 15;
+  animation: dropdownFade 0.25s ease;
+}
+
+.mapel-dropdown ul.hidden {
+  display: none;
+}
+
+.mapel-dropdown li {
+  padding: 12px 16px;
+  font-size: 15px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.mapel-dropdown li:hover {
+  background: #fff0f0;
+  color: var(--accent);
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mode-status {
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.mode-status.online {
+  color: #00b050; /* hijau */
+}
+
+.mode-status.offline {
+  color: #d9534f; /* merah */
+}

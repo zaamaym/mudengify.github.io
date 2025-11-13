@@ -1,0 +1,159 @@
+:root {
+  --bg: #fff7fb;
+  --card: #ffffff;
+  --accent: #ff6b6b;
+  --accent2: #ffd93d;
+  --muted: #6b6b6b;
+  --shadow: 0 10px 25px rgba(99, 90, 255, 0.06);
+  --text: #222;
+}
+/* =========================================================
+   🧭 TOPBAR (Versi Rapi & Responsif)
+========================================================= */
+.topbar {
+  position: sticky;
+  margin-top: -5px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  padding: 10px 20px;
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   🚪 LOGOUT BUTTON
+========================================================= */
+.logout-top {
+  position: absolute;
+  background: linear-gradient(90deg, #e24a4a, #d85e5e) !important;
+  color: #fff !important;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 14px rgba(80, 160, 255, 0.15);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.logout-top:hover {
+  filter: brightness(1.05);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+/* =========================================================
+   📱 RESPONSIVE
+========================================================= */
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .logout-top {
+    padding: 7px 12px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+}
+.admin-card {
+  width: 90%;
+  max-width: 900px;
+  margin-top: -170px;
+  background: #ffffffc9;
+  backdrop-filter: blur(8px);
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow-x: auto; /* penting biar scroll kalau di HP */
+}
+
+/* Judul & subjudul */
+.admin-card h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.admin-card .subtitle {
+  text-align: center;
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Bungkus tabel biar bisa scroll horizontal */
+#table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+/* Tabel utama */
+#resultTable {
+  width: 100%;
+  min-width: 700px; /* biar nggak hancur di HP */
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+#resultTable th,
+#resultTable td {
+  padding: 10px 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap; /* biar kolom nggak turun ke bawah */
+}
+
+#resultTable th {
+  background: #f7f8ff;
+  font-weight: 600;
+  color: #333;
+}
+
+#resultTable tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  .admin-card {
+    padding: 16px;
+  }
+
+  .admin-card h1 {
+    font-size: 20px;
+  }
+
+  #resultTable th,
+  #resultTable td {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+}

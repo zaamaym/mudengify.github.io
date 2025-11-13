@@ -1,0 +1,573 @@
+/* SUBMIT.css */
+/* ================================
+   ROOT VARIABLES
+=================================== */
+:root {
+  --bg: #fff7fb;
+  --card: #ffffff;
+  --accent: #ff6b6b;
+  --accent2: #ffd93d;
+  --muted: #6b6b6b;
+  --shadow: 0 10px 25px rgba(99, 90, 255, 0.06);
+  --text: #222;
+}
+
+/* ================================
+   RESULT CARD
+=================================== */
+.result-card {
+  max-width: 720px;
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-1.3px);
+  outline: 3px solid rgba(135, 185, 255, 0.2);
+  box-shadow: 0 10px 22px rgba(4, 29, 44, 0.2);
+}
+
+/* ================================
+   TAMPILAN SPEEDOMETER (GAUGE)
+=================================== */
+.score-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(50px);
+  margin: -250px 0 -230px;
+  transition: all 0.3s ease;
+}
+
+.score-card canvas {
+  width: 140px;
+  max-width: 240px;
+  height: auto;
+  position: relative;
+  display: flex;
+  pointer-events: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(0);
+  margin-bottom: 20px;
+  transition: width 0.3s ease;
+}
+
+.score-card .score-large {
+  position: absolute;
+  top: 50%;
+  bottom: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  transition: font-size 0.3s ease;
+}
+
+/* ================================
+   📊 STAT CARD
+=================================== */
+.stat {
+  position: relative;
+  background: #f5f7fb; /* Ganti dengan warna solid */
+  border-radius: 14px;
+  padding: 0.8rem 0.6rem;
+  outline: 0.25px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.stat:hover {
+  transform: translateY(-3px);
+  outline: 1px solid rgba(255, 107, 107, 0.2);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
+/* Menghilangkan efek ::before yang mengganggu */
+.stat::before {
+  display: none; /* Menonaktifkan efek gradient */
+}
+
+.stat::after {
+  content: attr(data-icon);
+  font-size: 20px;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+/* ================================
+   GRID STATISTIK HASIL UJIAN
+=================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 kolom */
+  gap: 1rem;
+  margin-top: 20px; /* Penyesuaian margin */
+  width: 100%;
+  max-width: 700px; /* Lebar maksimum */
+  margin-inline: auto;
+}
+
+/* === Judul dan Nilai === */
+.stat-title {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  margin-top: 0.2rem;
+}
+
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #222;
+}
+
+/* ================================
+   WARNA KATEGORI
+=================================== */
+.correct {
+  background-color: #e1ffe3;
+}
+.correct::after {
+  content: "✅";
+}
+
+.wrong {
+  background-color: #ffe8e8;
+}
+.wrong::after {
+  content: "❌";
+}
+
+.unanswered {
+  background-color: rgb(250, 255, 223);
+}
+.unanswered::after {
+  content: "⏳";
+}
+
+.total {
+  border-top-color: #007aff;
+}
+.total::after {
+  content: "📊";
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+=================================== */
+
+/* Layar Mobile (≤768px) */
+@media (max-width: 768px) {
+  .score-card {
+    transform: none;
+    margin: -20px 70px 120px;
+  }
+
+  .score-card canvas {
+    width: 180px;
+  }
+
+  .score-card .score-large {
+    position: auto;
+    transform: none;
+    margin-top: 8px;
+    font-size: 30px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 kolom */
+    margin-top: 0;
+    gap: 0.8rem;
+    max-width: 400px;
+  }
+
+  .stat-value {
+    font-size: 1.2rem;
+  }
+
+  .stat-title {
+    font-size: 0.75rem;
+  }
+}
+/* Layar Sedang (Tablet ≤992px) */
+/* Layar Sedang (Tablet ≤992px) */
+@media (max-width: 992px) {
+  .score-card {
+    transform: translateY(10px);
+    margin-bottom: -10rem;
+  }
+
+  .score-card canvas {
+    width: 160px;
+  }
+
+  .score-card .score-large {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 34px;
+    text-align: center;
+    width: 100%;
+  }
+}
+@media (max-width: 692px) {
+  .score-card {
+    transform: translateY(10px);
+    margin-bottom: -2rem;
+  }
+}
+/* ================================
+   🎉 CONFETTI ANIMATION
+=================================== */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.confetti {
+  position: absolute;
+  top: -10px;
+  opacity: 0.9;
+  border-radius: 2px;
+  animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+#replayEffectBtn, #shareBtn, #resetExamBtn{
+  background: linear-gradient(90deg, #ff7a7a, #ffd93d);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#replayEffectBtn:hover, #shareBtn:hover, #resetExamBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* ================================
+   SHARE BOX
+=================================== */
+.share-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-backdrop {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(3px);
+  background: rgba(0,0,0,0.6);
+}
+
+.share-box {
+  position: relative;
+  background: #fff;
+  color: #222;
+  border-radius: 16px;
+  padding: 16px;
+  max-width: 90%;
+  text-align: center;
+  z-index: 1;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  animation: popIn 0.3s ease;
+}
+
+.share-box img.share-preview {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.share-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.share-options .btn {
+  background: linear-gradient(90deg, #ff7a7a, #ffd93d);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  width: 100%;
+  height: 20%;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ================================
+   RESPONSIVE FIX: SHARE MODAL
+================================== */
+
+/* 📱 Default (mobile-first) tetap seperti sekarang */
+.share-box {
+  max-width: 90%;
+  width: 100%;
+}
+
+/* 💻 Desktop view: lebih kecil dan elegan */
+@media (min-width: 768px) {
+  .share-box {
+    max-width: 420px; /* batasi lebarnya */
+    padding: 24px;
+    border-radius: 20px;
+  }
+  .share-box img.share-preview {
+    max-height: 220px;
+    object-fit: cover;
+  }
+  .share-options {
+    gap: 8px;
+  }
+  .share-options .btn {
+    font-size: 0.95rem;
+    padding: 8px 14px;
+  }
+}
+
+/* 🖥️ Extra large screen (biar ga terlalu besar di monitor lebar) */
+@media (min-width: 1200px) {
+  .share-box {
+    max-width: 360px;
+  }
+}
+
+/*  Layer Adjusting */
+.score-card {
+  position: relative;
+  z-index: 1; /* gauge layer 1 */
+}
+
+.stats-grid {
+  position: relative;
+  z-index: 2; /* kotak statistik di atas gauge */
+}
+
+.review-btn-wrap {
+  position: relative;
+  z-index: 3; /* tombol paling atas */
+}
+
+
+/* =========================================================
+   🧭 TOPBAR (Versi Rapi & Responsif)
+========================================================= */
+.topbar {
+  position: sticky;
+  margin-top: -5px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  padding: 10px 20px;
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   🚪 LOGOUT BUTTON
+========================================================= */
+.logout-top {
+  position: absolute;
+  background: linear-gradient(90deg, #e24a4a, #d85e5e) !important;
+  color: #fff !important;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 14px rgba(80, 160, 255, 0.15);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.logout-top:hover {
+  filter: brightness(1.05);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+/* =========================================================
+   📱 RESPONSIVE
+========================================================= */
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .logout-top {
+    padding: 7px 12px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+}
+
+/* Animasi kecil biar smooth muncul */
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.8);
+  z-index: 9999;
+  font-weight: 600;
+  color: #333;
+}
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 4px solid #ccc;
+  border-top-color: #00bcd4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.score-card canvas {
+  filter: drop-shadow(0 0 8px rgba(17, 50, 126, 0.08));
+}
+
+#replayEffectBtn, #shareBtn, #resetExamBtn {
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.4);
+}
+
+.result-card, .stats-grid, .review-btn-wrap {
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* nonaktifkan semua animasi pas di-screenshot */
+.no-anim {
+  animation: none !important;
+  opacity: 1 !important;
+}
+.result-card-header {
+  display: flex;
+  flex-direction: column; /* urut: atas - tengah - bawah */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Bagian atas, berisi logo & username */
+.header-top {
+  display: flex;
+  justify-content: space-between; /* logo kiri, username kanan */
+  align-items: flex-start;         /* bisa diganti 'center' atau 'flex-end' */
+  width: 100%;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.logo-card {
+  width: 140px;
+  height: auto;
+  margin-left: -20px;
+}
+
+.usertext {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Judul tengah */
+#page-title {
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Mapel bawah */
+.mapeltext {
+  font-size: 1rem;
+  color: #555;
+  margin-top: -0.3rem;
+}
+
+.predikattext{
+  font-weight: 700;
+}
+.predikat-row {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* biar vertikalnya sejajar */
+  gap: 6px; /* jarak antara label dan teks */
+}
+
+.predikat-label {
+  margin: 0;
+  font-weight: 700;
+}

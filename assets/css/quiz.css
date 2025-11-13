@@ -1,0 +1,342 @@
+/* QUIZ.CSS */
+/* =========================================================
+   🎨 ROOT VARIABLES
+========================================================= */
+:root {
+  --bg: #fff7fb;
+  --card: #ffffff;
+  --accent: #ff6b6b;
+  --accent2: #ffd93d;
+  --muted: #6b6b6b;
+  --shadow: 0 10px 25px rgba(99, 90, 255, 0.06);
+  --text: #222;
+}
+
+/* =========================================================
+   🧭 TOPBAR
+========================================================= */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  padding: 10px 24px;
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow);
+}
+
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   🧑‍💻 TOP ACTIONS (Buttons & Timer)
+========================================================= */
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Tombol Ragu-Ragu Aktif */
+#flag-btn.active-flag {
+  background: linear-gradient(90deg, #ffe066, #ffd43b);
+  color: #222;
+  border: 2px solid #ffd43b;
+  box-shadow: 0 0 10px rgba(255, 208, 0, 0.3);
+}
+
+.timer {
+  margin-right: 20px !important;  /* tambahkan ruang kanan */
+  font-size: 14px;
+  margin-top: auto;
+}
+
+/* =========================================================
+   🕰️ PROGRESS BAR
+========================================================= */
+.progress-wrap {
+  width: 160px;
+  height: 10px;
+  margin-top: auto;
+  background: #ffeedd;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ffd93d, #ff6b6b);
+  transition: width 0.3s ease;
+}
+
+/* =========================================================
+   🔤 FONT SIZE SLIDER
+========================================================= */
+.font-slider {
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  gap: 10px;
+  margin: 10px auto -5px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.font-slider input[type="range"] {
+  width: 100px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+#fontValue {
+  min-width: 10px;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* =========================================================
+   🔠 QUESTION TEXT (Font Size Transition)
+========================================================= */
+.question-text {
+  font-weight: 400;
+  transition: font-size 0.2s ease;
+}
+
+.source-text{
+  color: #636363;
+  margin-top: -3px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   🧭 TOPBAR (Versi Rapi & Responsif)
+========================================================= */
+.topbar {
+  position: sticky;
+  margin-top: -5px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card);
+  padding: 10px 20px;
+  border-radius: 0 0 16px 16px;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   🧑‍💻 TOP ACTIONS (Progress, Timer, Logout)
+========================================================= */
+.top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap; /* biar mobile gak pecah */
+}
+
+.top-actions > * {
+  flex-shrink: 0;
+}
+
+.progress-wrap {
+  width: 160px;
+  height: 10px;
+  background: #ffeedd;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ffd93d, #ff6b6b);
+  transition: width 0.3s ease;
+}
+
+.timer {
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+/* =========================================================
+   🚪 LOGOUT BUTTON
+========================================================= */
+.logout-top {
+  position: relative;
+  background: linear-gradient(90deg, #e24a4a, #d85e5e) !important;
+  color: #fff !important;
+  border-radius: 10px;
+  margin-top: -2rem;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 14px rgba(80, 160, 255, 0.15);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.logout-top:hover {
+  filter: brightness(1.05);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   📱 RESPONSIVE
+========================================================= */
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .top-actions {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+    gap: 8px;
+  }
+
+  .progress-wrap {
+    flex: 1;
+    max-width: 160px;
+  }
+
+  .timer {
+    font-size: 13px;
+  }
+}
+@media (max-width:780px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+  .top-actions {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    gap: 8px;
+  }
+  .logout-top {
+    position: absolute;
+    padding: 7px 12px;
+    font-size: 13px;
+    margin-top: 0.4rem;
+  }
+}
+#countdown {
+  font-size: 1em;
+  font-weight: bold;
+  color: darkgray;
+  transition: color 0.3s ease;
+}
+
+@keyframes blink {
+  50% { opacity: 0.4; }
+}
+
+/* Tombol navigasi dasar */
+.navigation-buttons .btn {
+  transition: all 0.2s ease;
+}
+
+/* Keadaan tombol nonaktif */
+.btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+}
+
+.confirm-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex; justify-content: center; align-items: center;
+  z-index: 9999;
+}
+.confirm-modal .logout-backdrop {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+.confirm-modal .logout-panel {
+  position: relative;
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px 22px;
+  width: 320px;
+  z-index: 2;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+  text-align: center;
+  animation: fadeInUp 0.25s ease;
+}
+.confirm-modal .close-btn {
+  position: absolute;
+  top: 8px; right: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+}
+.btn.primary {
+  background: linear-gradient(90deg, #4a90e2, #5ec9f3);
+  color: white;
+  font-weight: 600;
+}
+.btn.danger {
+  background: linear-gradient(90deg, #e24a4a, #b72d2d);
+  color: white;
+  font-weight: 600;
+}
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
