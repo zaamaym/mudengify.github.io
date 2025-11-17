@@ -132,10 +132,18 @@
 }
 
 .label .icon-btn{
-  position:absolute;
+  position:relative;
   margin-top: 7px;
   background: var(--card);
-  margin-left: 20rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border: 1.3px solid rgb(235, 233, 233);
+  transition: all 0.25s ease;
+}
+
+.label .icon-btn:hover{
+  background: #ff7f7f;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 107, 107, 0.35);
 }
 
 /* =========================================================
