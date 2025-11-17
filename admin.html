@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin - Mudengify TKA</title>
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <header class="topbar">
+    <div class="brand-mini">
+      <img
+        src="assets/img/mudengify.png"
+        alt="Mudengify"
+        class="brand-logo"
+        onmouseover="this.src='assets/img/mudengifylogo_animated.gif'"
+        onmouseout="this.src='assets/img/mudengify.png'"
+      />
+    </div>
+    <button id="logout-btn" class="btn ghost logout-top">Logout</button>
+  </header>
+  <div class="page-center">
+    <div class="card admin-card">
+      <h1>📊 Data Hasil Siswa</h1>
+      <p class="subtitle">Rekap hasil pengerjaan tiap siswa</p>
+      <div class="admin-controls" style="display: flex; gap: 12px; margin-bottom: 12px; align-items:center;">
+    
+    <!-- SEARCH -->
+    <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Cari nama / mapel / skor..." 
+        class="btn" 
+        style="padding:6px 10px; width: 220px;"
+    />
+
+    <!-- FILTER MAPEL -->
+    <select id="filterMapel" class="btn" style="padding:6px 10px;">
+        <option value="">Semua Mapel</option>
+    </select>
+
+    <!-- SORT -->
+    <select id="sortBy" class="btn" style="padding:6px 10px;">
+        <option value="">Urutkan...</option>
+        <option value="name_asc">Nama A → Z</option>
+        <option value="name_desc">Nama Z → A</option>
+        <option value="mapel_asc">Mapel A → Z</option>
+        <option value="mapel_desc">Mapel Z → A</option>
+        <option value="score_desc">Skor Tertinggi</option>
+        <option value="score_asc">Skor Terendah</option>
+    </select>
+
+</div>
+
+      <div id="table-container">
+        <table id="resultTable">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Mapel</th>
+              <th>Nilai</th>
+              <th>Predikat</th>
+              <th>Detail</th>
+              <th>Reset</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- data siswa masuk dari admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

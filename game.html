@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Smash It! (Single file)</title>
+  <style>
+    :root{
+      --bg:#2c3e50; --world:#ecf0f1; --inv:#34495e; --tool:#ecf0f1; --danger:#e74c3c; --warn:#f39c12; --smoke:#95a5a6;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:#fff;overscroll-behavior:none}
+
+    /* Modal picker */
+    #object-selector-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.65);z-index:999}
+    .selector-card{background:var(--world);color:#000;padding:20px;border-radius:12px;max-width:95%;width:640px}
+    .object-choices{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .object-choice{width:110px;height:110px;border-radius:10px;object-fit:contain;border:2px solid rgba(0,0,0,.08);cursor:pointer}
+
+    /* Game world */
+    #game-world{position:fixed;inset:0;left:0;right:0;background:linear-gradient(180deg,#f5f7fa 0%, #e6eef6 60%);overflow:hidden}
+    #target-object-container{position:absolute;width:150px;height:150px;will-change:transform;touch-action:none;cursor:grab}
+    #target-object-container {
+  position:absolute;
+  width:150px;
+  height:150px;
+  will-change:transform;
+  touch-action:none; /* sudah ada — bagus */
+  cursor:grab;
+  user-select:none; /* tambahkan ini */
+}
+
+    #target-object-img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+
+    /* inventory bar */
+    #inventory-bar{position:fixed;left:0;right:0;bottom:0;height:76px;background:var(--inv);display:flex;align-items:center;gap:10px;padding:8px 12px;z-index:800}
+    .tool-button{width:64px;height:64px;border-radius:10px;border:none;background:var(--tool);display:flex;align-items:center;justify-content:center;cursor:grab;padding:6px}
+    .tool-button:active{transform:scale(.96);cursor:grabbing}
+
+    /* Ghost */
+    #tool-ghost{position:fixed;z-index:1005;pointer-events:none;display:none;width:64px;height:64px;border-radius:10px;align-items:center;justify-content:center;overflow:hidden}
+
+    /* Elements */
+    .dynamite{position:absolute;width:22px;height:70px;border-radius:6px;background:var(--danger);border:2px solid #000}
+    .dynamite .spark{position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;box-shadow:0 0 12px var(--warn);background:var(--warn)}
+
+    .nuke{position:absolute;width:42px;height:110px;background:#444;border-radius:16px 16px 6px 6px;border:2px solid #111}
+
+    .bullet{position:absolute;width:6px;height:14px;border-radius:3px;background:var(--warn)}
+    .rocket{position:absolute;width:16px;height:48px;border-radius:8px;background:#666;border:1px solid #222}
+    .anvil{position:absolute;width:90px;height:60px;background:#555;clip-path:polygon(0% 25%,20%25,20%0,80%0,80%25,100%25,100%70,70%100,30%100);border:3px solid #000}
+
+    .explosion{position:absolute;border-radius:50%;pointer-events:none;mix-blend-mode:screen}
+
+    .crack{position:absolute;width:110px;height:110px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 v100 M0 50 h100 M20 20 l60 60 M20 80 l60 -60' stroke='%2334495e' stroke-width='2' fill='none' opacity='0.6'/%3E%3C/svg%3E");background-size:contain;background-repeat:no-repeat;pointer-events:none}
+
+    /* responsive tweaks */
+    @media (max-width:520px){.selector-card{padding:12px}.object-choice{width:88px;height:88px}}
+  </style>
+</head>
+<body>
+  <!-- Picker -->
+  <div id="object-selector-overlay">
+    <div class="selector-card">
+      <h2>Pilih Objek untuk Dibantai!</h2>
+      <div class="object-choices">
+        <img class="object-choice" data-src="assets/img/mudengifylogo.png" data-w="220" data-h="220" src="assets/img/mudengifylogo.png" alt="Objek 1">
+        <img class="object-choice" data-src="https://placehold.co/300x300/3498db/fff.png?text=Objek+2" data-w="200" data-h="200" src="https://placehold.co/150x150/3498db/white?text=Objek+2" alt="Objek 2">
+        <img class="object-choice" data-src="https://placehold.co/300x300/2ecc71/fff.png?text=Objek+3" data-w="180" data-h="220" src="https://placehold.co/150x150/2ecc71/white?text=Objek+3" alt="Objek 3">
+      </div>
+      <p style="text-align:center;margin-top:8px"><small>Ganti src dengan PNG opsional mu. Ukuran akan menyesuaikan.</small></p>
+    </div>
+  </div>
+
+  <div id="game-world">
+    <div id="target-object-container"><img id="target-object-img" src="" alt="target"/></div>
+  </div>
+
+  <div id="inventory-bar">
+    <button class="tool-button" data-tool="dynamite" title="Dinamit"><svg viewBox="0 0 100 100"><rect x="30" y="18" width="40" height="70" rx="8" fill="#e74c3c" stroke="#000" stroke-width="3"/><rect x="44" y="4" width="12" height="24" fill="#000"/></svg></button>
+    <button class="tool-button" data-tool="nuke" title="Nuklir"><svg viewBox="0 0 100 100"><rect x="30" y="10" width="40" height="70" rx="10" fill="#4a4a4a" stroke="#000" stroke-width="3"/></svg></button>
+    <button class="tool-button" data-tool="ak47" title="AK-47"><svg viewBox="0 0 100 100"><path d="M6 58h18l6 10h34v-8l20-6v-8l-20-6v-8H36l-6-10H12v26z" fill="#333"/></svg></button>
+    <button class="tool-button" data-tool="bazooka" title="Bazooka"><svg viewBox="0 0 100 100"><rect x="10" y="38" width="80" height="22" rx="4" fill="#27ae60" stroke="#000" stroke-width="3"/></svg></button>
+    <button class="tool-button" data-tool="anvil" title="Anvil"><svg viewBox="0 0 100 100"><path d="M10 30 H30 V10 H70 V30 H90 V70 H65 L50 90 L35 70 H10 Z" fill="#555" stroke="#000" stroke-width="3"/></svg></button>
+  </div>
+
+  <div id="tool-ghost"></div>
+
+  <script>
+  (function(){
+    // DOM
+    const selector = document.getElementById('object-selector-overlay');
+    const choices = document.querySelectorAll('.object-choice');
+    const world = document.getElementById('game-world');
+    const targetEl = document.getElementById('target-object-container');
+    const targetImg = document.getElementById('target-object-img');
+    const inv = document.getElementById('inventory-bar');
+    const tools = document.querySelectorAll('.tool-button');
+    const ghost = document.getElementById('tool-ghost');
+
+    // State
+    let w = innerWidth, h = innerHeight;
+    let inventoryH = inv.offsetHeight;
+    let groundY = h - inventoryH;
+
+    const target = {x:0,y:0,w:150,h:150,vx:0,vy:0,isDragging:false,lastX:0,lastY:0,imgAlphaMap:null};
+    const physics = {gravity:0.6,damping:0.995,bounce:-0.6,throwMult:1.6};
+    let gameElements = [];
+    let raf = null;
+
+    // Tool drag state
+    let activeTool = null; let isDraggingTool=false; let akInterval=null;
+
+    // Time based loop helper
+    let lastTS = performance.now();
+
+    // init picker
+    choices.forEach(c=>c.addEventListener('click',()=>{
+      const src=c.dataset.src||c.src; const ww=c.dataset.w||150; const hh=c.dataset.h||150;
+      targetImg.src=src; target.w=Number(ww); target.h=Number(hh);
+      targetEl.style.width=target.w+"px"; targetEl.style.height=target.h+"px";
+      target.x = (w-target.w)/2; target.y=(h-target.h)/2 - 40; renderTarget(); selector.style.display='none';
+      ensureListeners(); startLoop();
+      // try to build simple alpha map for future fine collision (best-effort, may fail for CORS images)
+      buildAlphaMapForImage(targetImg).catch(()=>{});
+    }));
+
+    function ensureListeners(){
+      window.addEventListener('resize',onResize);
+
+      // target drag (mouse+touch)
+      targetEl.addEventListener('pointerdown',onTargetDown);
+      window.addEventListener('pointermove',onPointerMove,{passive:false});
+      window.addEventListener('pointerup',onPointerUp);
+
+      // tools
+      tools.forEach(b=>{
+        b.addEventListener('pointerdown',onToolDown);
+      });
+
+      // ghost follow
+      window.addEventListener('pointermove',(e)=>{ if(isDraggingTool) moveGhost(e.clientX,e.clientY); });
+    }
+
+    function onResize(){ w=innerWidth; h=innerHeight; inventoryH=inv.offsetHeight; groundY=h-inventoryH; }
+
+    function onTargetDown(e){ if(activeTool) return; e.preventDefault(); target.isDragging=true; target.lastX=target.x; target.lastY=target.y; targetEl.setPointerCapture(e.pointerId); }
+    function onPointerMove(e){ if(target.isDragging){ e.preventDefault(); const pos= {x:e.clientX - target.w/2, y:e.clientY - target.h/2}; target.x=pos.x; target.y=pos.y; }
+      if(isDraggingTool) { /* handled by pointermove ghost */ }
+    }
+    function onPointerUp(e){ if(target.isDragging){ target.isDragging=false; // compute throw velocity
+        target.vx = (target.x - target.lastX) * physics.throwMult; target.vy = (target.y - target.lastY) * physics.throwMult; }
+      if(isDraggingTool){ handleToolDrop(e.clientX,e.clientY); }
+    }
+
+    function onToolDown(e){ e.preventDefault(); const t=e.currentTarget.dataset.tool; isDraggingTool=true; activeTool=t; showGhost(e.clientX,e.clientY,e.currentTarget.innerHTML);
+      if(t==='ak47') startAk(); }
+
+    function showGhost(x,y,html){ ghost.style.display='flex'; ghost.innerHTML=html; ghost.style.left=(x-32)+'px'; ghost.style.top=(y-32)+'px'; }
+    function moveGhost(x,y){ ghost.style.left=(x-32)+'px'; ghost.style.top=(y-32)+'px'; // rotate to aim
+      if(activeTool==='ak47' || activeTool==='bazooka'){ const c=getTargetCenter(); const angle=Math.atan2(c.y - y, c.x - x); ghost.style.transform=`translate(0,0) rotate(${angle+Math.PI/2}rad)` } }
+    function hideGhost(){ ghost.style.display='none'; ghost.innerHTML=''; ghost.style.transform='none'; }
+
+    function handleToolDrop(cx,cy){ // if dropped onto inventory area -> cancel
+      if(cx && cy && cy > groundY){ resetToolDrag(); return; }
+      switch(activeTool){
+        case 'dynamite': createDynamite(cx,cy); break;
+        case 'nuke': createNuke(cx,cy); break;
+        case 'ak47': stopAk(); break;
+        case 'bazooka': fireBazooka(cx,cy); break;
+        case 'anvil': dropAnvil(cx); break;
+      }
+      resetToolDrag();
+    }
+
+    function resetToolDrag(){ isDraggingTool=false; activeTool=null; hideGhost(); stopAk(); }
+
+    // === Elements creation ===
+    function createDynamite(x,y){ const el=document.createElement('div'); el.className='dynamite'; el.innerHTML='<div class="spark"></div>'; world.appendChild(el);
+      const obj={el,x:x-11,y:y-35,timer:2200,dead:false,update(){ this.timer -= delta; if(this.timer<=0){ createExplosion(this.x+11,this.y+35,140,70); this.dead=true } }, render(){ this.el.style.transform=`translate(${this.x}px,${this.y}px)` }}; gameElements.push(obj); }
+
+    function createNuke(x,y){ const el=document.createElement('div'); el.className='nuke'; world.appendChild(el);
+      const obj={el,x:x-21,y:y-55,vy:0,dead:false,update(){ this.vy += physics.gravity; this.y += this.vy; if(this.y+110>groundY){ this.y = groundY-110; createExplosion(this.x+21,this.y+110,420,180,true); this.dead=true } }, render(){ this.el.style.transform=`translate(${this.x}px,${this.y}px)` }}; gameElements.push(obj); }
+
+    function startAk(){ if(akInterval) return; fireAkBullet(); akInterval=setInterval(fireAkBullet,100); }
+    function stopAk(){ clearInterval(akInterval); akInterval=null; }
+
+    function fireAkBullet(){ if(!isDraggingTool) return; const ghostRect=ghost.getBoundingClientRect(); const sx=ghostRect.left+ghostRect.width/2, sy=ghostRect.top+ghostRect.height/2; const tc = getTargetCenter(); const angle=Math.atan2(tc.y - sy, tc.x - sx); const speed=26; const el=document.createElement('div'); el.className='bullet'; world.appendChild(el);
+      const b={el,x:sx-3,y:sy-7,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,dead:false,w:6,h:14,update(){ this.x += this.vx; this.y += this.vy; if(checkCollision(this,target)){ applyForceToTarget(this.vx*0.08,this.vy*0.08); this.dead=true; createTinySpark(this.x,this.y); } if(this.x< -50 || this.x> w+50 || this.y < -50 || this.y>h+50) this.dead=true }, render(){ const deg = Math.atan2(this.vy,this.vx)*180/Math.PI + 90; this.el.style.transform=`translate(${this.x}px,${this.y}px) rotate(${deg}deg)` }}; gameElements.push(b); }
+
+    function fireBazooka(x,y){ const sx=x-8, sy=y-24; const tc=getTargetCenter(); const angle=Math.atan2(tc.y - sy, tc.x - sx); const speed=14; const el=document.createElement('div'); el.className='rocket'; el.innerHTML=''; world.appendChild(el);
+      const r={el,x:sx,y:sy,w:16,h:48,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,dead:false,update(){ this.vy+=physics.gravity*0.06; this.x+=this.vx; this.y+=this.vy; // smoke particle
+          spawnSmoke(this.x+8,this.y+this.h);
+          if(checkCollision(this,target)){ createExplosion(this.x+this.w/2,this.y+this.h/2,120,90); this.dead=true }
+          if(this.x< -100 || this.x> w+100 || this.y>h+200) this.dead=true }, render(){ const rot=Math.atan2(this.vy,this.vx)*180/Math.PI + 90; this.el.style.transform=`translate(${this.x}px,${this.y}px) rotate(${rot}deg)` }}; gameElements.push(r); }
+
+    function dropAnvil(cx){ const el=document.createElement('div'); el.className='anvil'; world.appendChild(el);
+      const a={el,x:cx-45,y:-140,vy:0,w:90,h:60,dead:false,update(){ this.vy += physics.gravity*1.6; this.y += this.vy; if(checkCollision(this,target)){ const dir = (target.x+target.w/2) > (this.x+this.w/2) ? 1 : -1; applyForceToTarget(25*dir,-24); createCrack(this.x+this.w/2,this.y+this.h); this.dead=true } if(this.y > h+200) this.dead=true }, render(){ this.el.style.transform=`translate(${this.x}px,${this.y}px)` }}; gameElements.push(a); }
+
+    // === Utility visual helpers ===
+    function spawnSmoke(x,y){ const p=document.createElement('div'); p.style.position='absolute'; p.style.left=(x-6)+'px'; p.style.top=(y-6)+'px'; p.style.width='10px'; p.style.height='10px'; p.style.borderRadius='50%'; p.style.opacity='0.6'; p.style.pointerEvents='none'; p.style.background= 'radial-gradient(circle, rgba(179,179,179,0.9), rgba(150,150,150,0.3))'; world.appendChild(p);
+      const life=600+Math.random()*400; const start=performance.now(); const id=setInterval(()=>{ const t=(performance.now()-start)/life; p.style.transform=`scale(${1+ t*2}) translateY(${ -t*40 }px)`; p.style.opacity=String(0.6*(1-t)); if(t>=1){ clearInterval(id); p.remove(); } },40);
+    }
+    function createTinySpark(x,y){ const s=document.createElement('div'); s.style.position='absolute'; s.style.left=(x-4)+'px'; s.style.top=(y-4)+'px'; s.style.width='8px'; s.style.height='8px'; s.style.borderRadius='50%'; s.style.background= 'radial-gradient(circle, #fff2a8, #ff8b3d)'; world.appendChild(s); setTimeout(()=>s.remove(),260);
+    }
+
+    function createCrack(x,y){ const c=document.createElement('div'); c.className='crack'; c.style.transform=`translate(${x-55}px,${y-55}px) rotate(${Math.random()*360}deg)`; world.appendChild(c); setTimeout(()=>c.remove(),1400); }
+
+    function createExplosion(x,y,size,force,isNuke=false){ const el=document.createElement('div'); el.className='explosion'; el.style.width=size+'px'; el.style.height=size+'px'; el.style.left=(x-size/2)+'px'; el.style.top=(y-size/2)+'px'; el.style.background='radial-gradient(circle, rgba(255,220,120,0.95), rgba(255,80,20,0.8))'; world.appendChild(el);
+      setTimeout(()=>el.remove(),600);
+      // apply radial force to target
+      const tc=getTargetCenter(); const dx=tc.x - x; const dy=tc.y - y; const d=Math.max(10,Math.hypot(dx,dy)); if(d < size*1.8){ const falloff = 1 - (d/(size*1.8)); const ang=Math.atan2(dy,dx); applyForceToTarget(Math.cos(ang)*force*falloff, Math.sin(ang)*force*falloff); }
+      if(isNuke){ // mushroom
+        const m=document.createElement('div'); m.style.position='absolute'; m.style.left=(x-160)+'px'; m.style.top=(groundY-260)+'px'; m.style.width='320px'; m.style.height='240px'; m.style.pointerEvents='none'; m.style.opacity='0.95'; m.style.background='radial-gradient(circle at 50% 30%, rgba(255,200,80,0.95), rgba(220,90,10,0.85) 40%, transparent 70%)'; world.appendChild(m); setTimeout(()=>m.remove(),3800);
+      }
+    }
+
+    function applyForceToTarget(fx,fy){ target.vx += fx; target.vy += fy; }
+
+    function checkCollision(a,b){ // AABB first
+      const aw = a.w||1, ah=a.h||1; const bx=b.x, by=b.y, bw=b.w, bh=b.h;
+      if(a.x < bx + bw && a.x + aw > bx && a.y < by + bh && a.y + ah > by){
+        // if alpha map exists, do fine check (approx)
+        if(target.imgAlphaMap && (a.w && a.h)){
+          // map relative point to image coords - best effort: check center point
+          const px = Math.round((b.w/2 + (a.x - b.x)) * (target.imgAlphaMap.width / b.w));
+          const py = Math.round((b.h/2 + (a.y - b.y)) * (target.imgAlphaMap.height / b.h));
+          if(px>=0 && py>=0 && px<target.imgAlphaMap.width && py<target.imgAlphaMap.height){ return target.imgAlphaMap.data[py * target.imgAlphaMap.width + px] > 10 }
+        }
+        return true;
+      }
+      return false;
+    }
+
+    // Build alpha map (best-effort, CORS may block)
+    async function buildAlphaMapForImage(img){ return new Promise((res,rej)=>{
+      try{
+        const c=document.createElement('canvas'); c.width=img.naturalWidth; c.height=img.naturalHeight; const g=c.getContext('2d'); g.drawImage(img,0,0); const d=g.getImageData(0,0,c.width,c.height).data; // extract alpha channel
+        const alpha = new Uint8ClampedArray(c.width * c.height);
+        for(let i=0;i<c.width*c.height;i++) alpha[i]=d[i*4+3]; target.imgAlphaMap={width:c.width,height:c.height,data:alpha}; res();
+      }catch(e){ rej(e); }
+    }); }
+
+    function getTargetCenter(){ return {x: target.x + target.w/2, y: target.y + target.h/2}; }
+
+    // Physics & loop
+    let delta = 16;
+    function startLoop(){ lastTS = performance.now(); if(!raf) raf=requestAnimationFrame(loop); }
+    function loop(ts){ delta = Math.min(40, ts - lastTS); lastTS = ts; update(delta); renderAll(); raf=requestAnimationFrame(loop); }
+
+    function update(dt){ // target physics
+      if(!target.isDragging){ target.vy += physics.gravity * (dt/16); target.vx *= physics.damping; target.vy *= physics.damping; target.x += target.vx * (dt/16); target.y += target.vy * (dt/16);
+        // wall collisions
+        if(target.x < 0){ target.x=0; target.vx *= physics.bounce; createCrack(0, target.y + target.h/2); }
+        if(target.x + target.w > w){ target.x = w - target.w; target.vx *= physics.bounce; createCrack(w, target.y + target.h/2); }
+        if(target.y < 0){ target.y=0; target.vy *= physics.bounce; }
+        if(target.y + target.h > groundY){ if(Math.abs(target.vy) > 6) createCrack(target.x + target.w/2, groundY); target.y = groundY - target.h; target.vy *= physics.bounce; if(Math.abs(target.vx) < 0.6) target.vx = 0; if(Math.abs(target.vy) < 0.6) target.vy = 0 }
+      }
+
+      // update elements
+      for(let i=gameElements.length-1;i>=0;i--){ const e=gameElements[i]; if(e.update) e.update(); if(e.dead){ if(e.el && e.el.remove) e.el.remove(); gameElements.splice(i,1)} else if(e.render) e.render(); }
+    }
+
+    function renderAll(){ renderTarget(); }
+    function renderTarget(){ targetEl.style.transform = `translate(${target.x}px,${target.y}px)` }
+
+    // small helper particle for touch feedback
+    function createTouchPulse(x,y){ const p=document.createElement('div'); p.style.position='absolute'; p.style.left=(x-16)+'px'; p.style.top=(y-16)+'px'; p.style.width='32px'; p.style.height='32px'; p.style.borderRadius='50%'; p.style.background='rgba(255,255,255,0.14)'; world.appendChild(p); setTimeout(()=>p.remove(),300); }
+
+    // Delta-safe basic collision check function wrapper used earlier
+
+    // build target alpha map when image loads
+    targetImg.addEventListener('load',()=>{ buildAlphaMapForImage(targetImg).catch(()=>{}); });
+
+    // expose small dev helper
+    window.SMASH_STATE = {gameElements, target};
+
+    // start w/o an image until user picks one
+  })();
+  </script>
+</body>
+</html>

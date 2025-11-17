@@ -66,14 +66,14 @@
   <!-- === SCRIPTS === -->
   <script>
   // === 1️⃣ Ambil data user dan mapel ===
-  const userStr = localStorage.getItem('mudengify_user');
+  let userStr = JSON.parse(localStorage.getItem('mudengify_user'));
   if (!userStr) {
     alert('Anda belum login.');
     location.assign('index.html');
   }
-
-  const user = JSON.parse(userStr);
-  const mapel = user.mapel; // contoh: "bahasa-indonesia"
+  if(userStr.from === "admin") userStr = JSON.parse(localStorage.getItem('mudengify_admin_view'));
+  const user = userStr;
+  const mapel = userStr.mapel; // contoh: "bahasa-indonesia"
 
   // === 2️⃣ Load quiz_data.js terlebih dahulu ===
   const dataScript = document.createElement('script');
