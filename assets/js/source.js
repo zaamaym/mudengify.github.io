@@ -328,6 +328,10 @@ async loadFile(name, path) {
       "bahasa-indonesia/" : {
         "quiz_data.js" : "data/bahasa-indonesia/quiz_data.js",
         "rules.js" : "data/bahasa-indonesia/rules.js"
+      },
+      "tester/" : {
+        "quiz_data.js" : "data/tester/quiz_data.js",
+        "rules.js" : "data/tester/rules.js"
       }
     },
     "index.html": "index.html",
